@@ -1,3 +1,4 @@
+import {useDispatch} from 'react-redux'
 export const LOAD_ITEMS = "items/LOAD_ITEMS";
 export const REMOVE_ITEM = "items/REMOVE_ITEM";
 export const UPDATE_ITEM = "items/UPDATE_ITEM";
@@ -24,6 +25,24 @@ const remove = (itemId, pokemonId) => ({
   itemId,
   pokemonId,
 });
+
+export const getItems = (id) => async dispatch => {
+  // const dispatch = useDispatch();
+  const response = await fetch(`/api/pokemon/${id}/items`
+  // {
+  //   method: 'GET',
+  //   headers: {'Content-Type': 'application/json'},
+  //   body: {items}
+  // }
+  )
+
+  if(response.ok){
+    const itemList = await response.json();
+    dispatch(load(itemList, id));
+    // return itemList
+  }
+}
+
 
 const initialState = {};
 
