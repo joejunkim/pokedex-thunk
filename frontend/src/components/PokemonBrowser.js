@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route, useParams } from 'react-router-dom';
 
@@ -15,11 +15,14 @@ const PokemonBrowser = () => {
   });
   const [showForm, setShowForm] = useState(false);
 
+  useEffect(() => {
+    dispatch(getPokemon())
+  }, [])
+
   if (!pokemon) {
     return null;
   }
 
-  dispatch(getPokemon())
 
   return (
     <main>
